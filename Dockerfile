@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM python:3.7.7-slim
 
 RUN apt-get update -y && \
     apt-get install -y python-pip python-dev
@@ -15,6 +15,6 @@ COPY . /app
 
 ENTRYPOINT [ "python" ]
 
-CMD [ "main.py" ]
-
 EXPOSE 8080
+
+CMD ["python", "main.py", "8080"]
