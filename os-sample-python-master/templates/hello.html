@@ -1,0 +1,36 @@
+
+<!DOCTYPE Html>
+<div class="container">
+    <h2>Flask Web Form</h2>
+    <form action="" method="POST" role="form">
+        {{ form.csrf }}
+        <div class="form-group">
+            <p><label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="What's your name?"></p>
+
+            <p><label for="email">Email:</label>
+                <input type="text" class="form-control" id="email" name="email" placeholder="Your email will be used to contact you."></p>
+
+            <p><label for="password">Password:</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter a password."></p>
+
+        </div>
+        <p><button type="submit" class="btn btn-success">Sign Up</button></p>
+    </form>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for message in messages %}
+    {% if "Error" not in message[1]: %}
+    <div class="alert alert-info">
+        <strong>Success! </strong> </div>
+    {% endif %}
+
+    {% if "Error" in message[1]: %}
+    <div class="alert alert-warning">
+        <strong>Success! </strong></div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+</div>
