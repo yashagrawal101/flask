@@ -1,13 +1,18 @@
-from alpine:latest
-RUN apk add --no-cache py3-pip \
-    && pip3 install --upgrade pip
+FROM ubuntu:16.04
+
+RUN apt-get update -y && \
+    apt-get install -y python-pip python-dev
+
+# We copy just the requirements.txt first to leverage Docker cache
+COPY ./requirements.txt /app/requirements.txt
 
 WORKDIR /app
+
+RUN pip install -r requirements.txt
+
 COPY . /app
 
-RUN pip3 --no-cache-dir install -r requirements.txt
+EXPOSE 8080
+ENTRYPOINT [ "python" ]
 
-EXPOSE 5000
-
-ENTRYPOINT ["python3"]
-CMD ["main.py"]
+CMD [ "app.py" ]
